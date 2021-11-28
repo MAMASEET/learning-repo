@@ -1,0 +1,33 @@
+- hosts:
+  tasks:
+
+    - name: Stoping Splunk
+      command: /opt/splunkforwarder/bin/splunk stop
+
+    - name: Backup the 6.6 Splunk configuration
+      command:  tar -zcvf  /opt/splunk-etc-bkp.tar.gz /opt/splunkforwarder/etc
+
+    - name: Backup the Splunk 6.6
+      command: mv /opt/splunkforwarder /opt/splunkforwarder-6.6.6-bkp
+  
+    - name: Downloading the latest splunk
+      command: wget -O /opt/splunkforwarder-8.2.2.1-ae6821b7c64b-Linux-x86_64.tgz 'https://download.splunk.com/products/universalforwarder/releases/8.2.2.1/linux/splunkforwarder-8.2.2.1-ae6821b7c64b-Linux-x86_64.tgz'
+
+    - name: Extracting the latest splunk
+      comannd: tar -xzvf /opt/splunkforwarder-8.2.2.1-ae6821b7c64b-Linux-x86_64.tgz -C /opt/
+
+    - name: Copying old Splunk configuration
+      command: tar -xzvf /opt/splunk-etc-bkp.tar.gz splunkforwarder/etc/ -C /opt/splunkforwarder/
+
+    - name: Changing ownership
+      command: chown -R splunk:splunk /opt/splunkforwarder
+
+    - name: Adding server.conf configuration
+      shell: echo | '
+            [general]
+            legacyCiphers = decryptOnly
+            ' >> /opt/splunkforwarder/etc/system/local/server.conf                                  
+
+    - name: Starting Splunk
+      command: /opt/splunkforwarder/bin/splunk start --accept-license --answer-yes
+

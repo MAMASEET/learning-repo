@@ -1,0 +1,134 @@
+Partition steps:
+===============
+
+Note:
+In your instance, the second partition "nvme0n1p2" was having less disk space. For meeting your requirement, we need 90GB space for the logical volumes. So I deleted the second partition and added 90GB to it.
+
+Step 1:
+========
+
+Deleting the second partition and creating the same with additional space.
+
+fdisk /dev/nvme0n1 
+type d  >> for initiating the delete operation
+type 2  >> here our partition is 2. Cases may vary.
+
+The second partition has been deleted and we need to create same partition with more space.
+
+ type n
+ type p
+ type 2
+ type enter
+ type +95G and enter
+
+ If its asking any sort of signature, type "N"
+
+ type t
+ type 2
+ type 8e  >> converting the partition to LVM
+ type w
+
+Now all the configurations has been saved.
+
+Step 2:
+========
+
+Resizing the physical volume with new space:
+
+pvresize /dev/nvme0n1p2
+
+
+Step 3:
+========
+
+Creating logical volumes from the volume group "Rootvg".
+
+pvcreate -L 10G abinitlv Rootvg
+pvcreate -L 20G abswlv Rootvg
+pvcreate -L 20G gexlv Rootvg
+pvcreate -L 40G hlv Rootvg
+
+Step 4:
+========
+
+Formating the logical volumes with xfs
+
+mkfs.xfs /dev/Rootvg/abinitlv
+mkfs.xfs /dev/Rootvg/abswlv
+mkfs.xfs /dev/Rootvg/gexlv
+mkfs.xfs /dev/Rootvg/hlv
+
+
+Step 5:
+========
+
+Creating mounting points:
+
+mkdir /var/abinitio
+mkdir /opt/abinitio-sw
+mkdir /gex
+mkdir /h
+
+
+Step 6:
+========
+
+Mountimg the logical volumes.
+
+You can do it in two ways.
+ 1. Mounting using the volumes and mounting directory
+ 2. Using fstab entry and then reboot the instance.
+
+ 1. mount /dev/Rootvg/abinitilv /var/abinitio
+    mount /dev/Rootvg/abswlv /opt/abinitio-sw
+    mount /dev/Rootvg/gexlv /gex
+    mount /dev/Rootvg/hlv /h
+ 
+ 2. Add the entries in the /etc/fstab and then reboot
+
+  Note: Make sure the entries and mount point are correct otherwise the instance wont start. 
+
+
+
+fdisk /dev/nvme1n1
+  963  lsblk
+  964  pvcreat /dev/nvme1n1p2
+  965  pvcreate /dev/nvme1n1p2
+  966  vgextend Rootvg /dev/nvme1n1p2
+  967  vgs
+  968  lvcreate -L 10G abinitlv Rootvg
+  969  lvcreate -L 10G -n abinitlv Rootvg
+  970  lvs
+  971
+  972  lvcreate -L 20G -n abswlv Rootvg
+  973  lvs
+  974  lvcreate -L 20G -n gexlv Rootv
+  975  lvcreate -L 20G -n gexlv Rootvg
+  976  lvcreate -L 40G -n hlv Rootvg
+  977  mkfs.xfs /dev/Rootvg/abinitlv
+  978  mkfs.xfs /dev/Rootvg/abswlv
+  979  mkfs.xfs /dev/Rootvg/gexlv
+  980  mkfs.xfs /dev/Rootvg/hlv
+  981  mkdir /var/abinitio
+  982  mkdir /opt/abinitio-sw
+  983  mkdir /gex
+  984  mkdir /h
+  985  ls /h
+  986  ls /gex/
+  987  ls /opt/abinitio-sw/
+  988  vi /etc/fstab
+  989  lsblk
+  990  pvs
+  991  lvs
+  992  ls /dev/mapper/
+  993  vi /etc/fstab
+  994  cat /etc/fstab
+  995  ls /h
+  996  ls /opt/abinitio-sw/
+  997  ls /var/abinitio/
+  998  ls /gex/
+  999  lvs
+ 1000  reboot
+ 1001  df -h
+ 1002  lsblk
+

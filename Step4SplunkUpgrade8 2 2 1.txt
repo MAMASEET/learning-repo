@@ -1,0 +1,22 @@
+1)  tar -czvf splunk.6.6.6.bkp.tar.gz splunk/>>>>>>>> backing up the old configuration file.
+
+2) wget -O  splunk.7.2.1.tgz "https://d7wz6hmoaavd0.cloudfront.net/products/splunk/releases/7.2.1/linux/splunk-7.2.1-be11b2c46e23-Linux-x86_64.tgz"
+
+3) tar -xzvf splunk.7.2.1.tgz -C /opt/>>>>>>>>>>>>> extrating the backup file to -C /opt/
+5) tar -xzvf splunk.6.6.6.bkp.tar.gz splunk/etc -C /opt/splunk/>>>>>>>>>>>> Restoring the old configuration fromm 6.6.6 backup.
+6) chown -R splunk.splunk splunk/>>>>>>>>>>>> allows you to change the user/or group ownership of a given file, dir or symbolic link.
+7) /opt/splunk/bin/splunk start --accept-license --answer-yes
+08)/opt/splunk/bin/splunk stop
+09)    tar -zxvf splunk.7.2.1.tgz -C /opt/
+10) chown -R splunk.splunk splunk/
+11) /opt/splunk/bin/splunk start --accept-license --answer-yes
+12) wget -O  splunk.8.1.0.tgz "https://d7wz6hmoaavd0.cloudfront.net/products/splunk/releases/8.1.0/linux/splunk-8.1.0-f57c09e87251-Linux-x86_64.tgz"
+13)  tar -xzvf splunk.8.1.0.tgz -C /opt/
+14)chown -R splunk.splunk splunk/
+15) /opt/splunk/bin/splunk stop
+16)  /opt/splunk/bin/splunk start --accept-license --answer-yes
+17)wget -O  splunk.8.2.2.1.tgz "https://d7wz6hmoaavd0.cloudfront.net/products/splunk/releases/8.2.2.1/linux/splunk-8.2.2.1-ae6821b7c64b-Linux-x86_64.tgz"
+18)  tar -xzvf splunk.8.2.2.1.tgz -C /opt/
+19)   /opt/splunk/bin/splunk stop
+20) chown -R splunk.splunk splunk
+21) /opt/splunk/bin/splunk start --accept-license --answer-yes

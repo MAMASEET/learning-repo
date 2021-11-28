@@ -1,0 +1,22 @@
+/dev/mapper/Rootvg-abinitlv     /var/abinitio   xfs     defaults        0 0
+/dev/mapper/Rootvg-abswlv       /opt/abinitio-sw        xfs     defaults        0 0
+/dev/mapper/Rootvg-gexlv        /gex    xfs     defaults        0 0
+/dev/mapper/Rootvg-hlv          /h      xfs     defaults        0 0
+
+
+
+/dev/mapper/Rootvg-rootlv       /       xfs     defaults        0 0
+UUID=52497eee-c605-4a43-9851-229e0f7c534a       /boot   xfs     defaults,nodev,nosuid   0 0
+/dev/mapper/Rootvg-homelv       /home   xfs     defaults,nosuid,nodev   0 0
+/dev/mapper/Rootvg-optlv        /opt    xfs     defaults,nodev  0 0
+/dev/mapper/Rootvg-tmplv        /tmp    xfs     defaults,nodev,noexec,nosuid    0 0
+/dev/mapper/Rootvg-varlv        /var    xfs     defaults,nodev  0 0
+/dev/mapper/Rootvg-loglv        /var/log        xfs     defaults,noexec,nodev,nosuid    0 0
+/dev/mapper/Rootvg-auditlv      /var/log/audit  xfs     defaults,nosuid,noexec,nodev    0 0
+/dev/mapper/Rootvg-swaplv       none    swap    defaults        0 0
+/dev/mapper/Rootvg-vartmplv     /var/tmp xfs    defaults,noexec,nodev,nosuid    0 0
+/dev/mapper/Rootvg-abinitlv     /var/abinitio   xfs     defaults        0 0
+/dev/mapper/Rootvg-abswlv       /opt/abinitio-sw        xfs     defaults        0 0
+/dev/mapper/Rootvg-gexlv        /gex    xfs     defaults        0 0
+/dev/mapper/Rootvg-hlv          /h      xfs     defaults        0 0
+tmpfs /dev/shm tmpfs defaults,nosuid,nodev,noexec 0 0

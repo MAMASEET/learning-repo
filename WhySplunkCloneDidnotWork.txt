@@ -1,0 +1,4 @@
+11:26:27 From  kesav  to  Everyone:
+	please note that this means it will have the same disk as sued when launching the initial instance, but will not have a copy of all data stored/changed on the initial instance since it was first started.
+11:28:42 From  kesav  to  Everyone:
+	https://stackoverflow.com/questions/43252337/create-copy-of-ec2-instance-and-launch-as-new-instances

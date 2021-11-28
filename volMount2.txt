@@ -1,0 +1,36 @@
+exit
+  997  grep -iw execve /etc/audit/audit.rules
+  998  grep -iw chown /etc/audit/audit.rules
+  999  grep -iw fchownat /etc/audit/audit.rules
+ 1000  exit
+ 1001  lsblk
+ 1002  fdisk /dev/nvme0n1
+ 1003  lsblk
+ 1004  pvresize /dev/nvme0n1p2
+ 1005  fdisk /dev/nvme0n1
+ 1006  pvresize /dev/nvme0n1p2
+ 1007  pvs
+ 1008  lvcreate -L 10G -n  abinitlv Rootvg
+ 1009  lvcreate -L 10G -n  abswlv Rootvg
+ 1010  lvcreate -L 10G -n  gexlv Rootvg
+ 1011  lvremove /dev/Rootvg/abinitlv
+ 1012  lvremove /dev/Rootvg/abswlv
+ 1013  lvremove /dev/Rootvg/gexlv
+ 1014  lvcreate -L 20G -n  abswlv Rootvg
+ 1015  lvcreate -L 20G -n  gexlv Rootvg
+ 1016  lvcreate -L 40G -n  hlv Rootvg
+ 1017  lsblk
+ 1018  mkdir /var/abinitio
+ 1019  mkdir /opt/abinitio-sw
+ 1020  mkdir /gex
+ 1021  mkdir /h
+ 1022  vi /etc/fstab
+ 1023  mkfs.xfs /dev/Rootvg/abinitlv
+ 1024  mkfs.xfs /dev/Rootvg/abswlv
+ 1025  mkfs.xfs /dev/Rootvg/gexlv
+ 1026  mkfs.xfs /dev/Rootvg/h
+ 1027  mkfs.xfs /dev/Rootvg/hlv
+ 1028  cat /etc/fstab
+ 1029  ls /dev/Rootvg/
+ 1030  ls /dev/mapper/Rootvg-hlv
+ 1031  cat /etc/fstab
